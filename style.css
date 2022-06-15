@@ -1,0 +1,39 @@
+/*
+Theme Name:My_baby
+*/
+*{
+    margin: 0;
+    padding: 0;
+}
+.my_nav, footer{
+    background-color: black;
+    text-align: right;
+    padding: 2%;
+    color: white;
+    
+}
+.my_nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+nav{
+    position: fixed;
+    width: 96%;
+}
+.my_nav a{
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+    padding: 3%;
+}
+.content, .contact, .order, .news, .small {
+    padding: 20%;
+    text-align: left;
+}
+.order ul, .news ul{
+    list-style-type: none;
+}

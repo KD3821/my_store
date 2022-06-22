@@ -29,3 +29,26 @@ function ConfirmOrder() {
         }
     }
 }
+
+function ConfirmReg() {
+    with(document.forms.reg) {
+
+        if (document.forms.reg.user_name.value==0 || document.forms.reg.user_email.value.length==0 || document.forms.reg.user_pass.value.length==0 ||
+            document.forms.reg.user_pass.value!==document.forms.reg.user_pass2.value || document.forms.reg.user_email.value.indexOf('@')==-1) {
+            if (document.forms.reg.user_email.value.indexOf('@')==-1) {
+                alert("Для регистрации,\nпожалуйста, укажите корректный email.");
+                return false;
+            } else if (document.forms.reg.user_pass.value !== document.forms.reg.user_pass2.value) {
+                alert("Для регистрации введенные\nпароли должны совпадать.");
+                return false;
+            } else {
+                alert("Для регистрации,\nпожалуйста, заполните все поля.");
+                return false;
+            }
+        } else {
+            alert("Уважаемый(-ая) "+ document.forms.reg.user_name.value +"\nВы успешно зарегистрированы! Используйте адрес эл.почты:\n"+ 
+            document.forms.reg.user_email.value + "\nдля входа в Личный Кабинет.");
+            return true;
+        }
+    }
+}

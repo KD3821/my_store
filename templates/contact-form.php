@@ -26,19 +26,25 @@ function create_my_db() {
     global $wpdb;
     $new_tablename = $wpdb->prefix."new_db"; //wp_new_db
 
-    $newdb_query="CREATE TABLE $new_tablename(
-        id int(10) NOT NULL AUTO_INCREMENT,
-        person varchar(100) DEFAULT '',
-        email varchar(100) DEFAULT '',
-        phone varchar(100) DEFAULT '',
-        contact varchar(100) DEFAULT '',
-        comment varchar(100) DEFAULT '',
-        PRIMARY KEY (id)          
-    )";
+    if ($wpdb->get_var("SHOW TABLES LIKE '$new_tablename'") != $new_tablename) {
 
-    require_once( ABSPATH ."wp-admin/includes/upgrade.php" );
-    dbDelta( $newdb_query );
+        $charset_collate = $wpdb->get_charset_collate();
 
+        $newdb_query="CREATE TABLE $new_tablename(
+            id int(10) NOT NULL AUTO_INCREMENT,
+            person varchar(100) DEFAULT '',
+            email varchar(100) DEFAULT '',
+            phone varchar(100) DEFAULT '',
+            contact varchar(100) DEFAULT '',
+            comment varchar(100) DEFAULT '',
+            PRIMARY KEY (id)          
+        ) $charset_collate;";
+
+        require_once( ABSPATH ."wp-admin/includes/upgrade.php" );
+        dbDelta( $newdb_query );
+    } else {
+
+    }
 }
 
 

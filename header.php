@@ -21,13 +21,27 @@
             'container' => '',
             'menu_class' => '',
             'menu_id' => ''
-        ] );
+        ]);
     ?>
     </div>
-<!-- <nav>
-        <a href="">Главная</a>
-        <a href="">Самым маленьким</a>
-        <a href="">Напишите нам</a>
-        <a href="">Проверить товар</a>
-        <a href="">Новости</a>
-</nav> -->
+    <div class="reg_nav">
+    <?php    
+        
+        if (isset($_SESSION['visitor'])) {
+            echo '<h3>'.$_SESSION['visitor'].'</h3>';
+            $_SESSION['log_var'] = 'logout';
+            
+        } else {
+            echo '<h3>Неавторизованный пользователь</h3>';
+            $_SESSION['log_var'] = 'login';
+        }
+    ?>
+    <?php 
+        wp_nav_menu([
+            'theme_location' => $_SESSION['log_var'],
+            'container' => '',
+            'menu_class' => '',
+            'menu_id' => ''
+        ]);
+    ?>
+    </div>

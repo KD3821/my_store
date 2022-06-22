@@ -30,10 +30,19 @@ nav{
     font-size: 30px;
     padding: 3%;
 }
-.content, .contact, .order, .news, .small {
+.content, .contact, .order, .news, .small, .register, .authorize, .settings, .logout {
     padding: 20%;
     text-align: left;
 }
 .order ul, .news ul{
     list-style-type: none;
+}
+.reg_nav ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.reg_nav ul li {
+    margin-left: 10px;
 }

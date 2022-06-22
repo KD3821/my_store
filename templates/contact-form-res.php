@@ -22,6 +22,7 @@ function insert_my_data() {
     }
 }
 
+
 function show_result() {
 
     global $wpdb;
@@ -36,4 +37,78 @@ function show_result() {
 
 }
 
+
+function insert_visitor() {
+
+    global $wpdb;
+    $tablename = $wpdb->prefix.'visitors_db';
+
+    $new_visitor = $_POST['user_name']; 
+    $new_email = $_POST['user_email'];
+    $new_pass = $_POST['user_pass'];
+
+    $pass_hashed = password_hash($new_pass, PASSWORD_DEFAULT);
+
+    if(isset($_POST['submit'])) {
+        
+        $data = array('visitor' => $new_visitor, 'email' => $new_email, 'pass' => $pass_hashed );
+        $format =  array( '%s', '%s', '%s');
+        if (!$wpdb->insert($tablename, $data, $format)) {
+            $_POST['user_email'] = '';
+        } else {
+
+        }
+    }
+}
+
+
+function show_reg_result() {
+
+    global $wpdb;
+    $reg_email = $_POST['user_email'];
+    if ($reg_email !== '') {
+        $table_result = $wpdb->prefix.'visitors_db';
+        $results = $wpdb->get_row( "SELECT * FROM $table_result WHERE email = '$reg_email' ;");
+        $_SESSION['visitor'] = $results->visitor;
+        echo '<p>Уважаемый(-ая):'.$results->visitor.'</p><p>Вы успешно зарегистрированы.</p><p>Ваш логин:'.$results->email.'<br>Ваш зашифрованный пароль: '.$results->pass.' ('.$_POST['user_pass'].').</p>';
+    } else {
+        echo '<p>Пользователь с таким email уже существует</p><p><a href="">Войдите</a> с помощью пароля </p><p>Либо используйте другой email для регистрации.</p>';
+    }
+    
+    
+}
+
+
+function show_auth_result() {
+
+    global $wpdb;
+    $auth_email = trim($_POST['user_email']);
+    $table_result = $wpdb->prefix.'visitors_db';
+    $results = $wpdb->get_row( "SELECT * FROM $table_result WHERE email = '$auth_email' ;");
+
+    if ($results) {
+        if (password_verify($_POST['user_pass'], $results->pass)) {
+            echo '<p>С возвращением, '.$results->visitor.'</p><p>Рады снова видеть Вас!</p>';
+            $_SESSION['visitor'] = $results->visitor;
+            echo '<h3>'.$_SESSION['visitor'].'</h3>';
+        } else {
+            echo 'Неправильный пароль!';
+        }
+    } else {
+        echo 'Пользователь не существует!';
+    }
+    
+}
+
+
+function show_settings() {
+
+    global $wpdb;
+    $visitor = $_SESSION['visitor'];
+    $table_result = $wpdb->prefix.'visitors_db';
+    $results = $wpdb->get_row( "SELECT * FROM $table_result WHERE visitor = '$visitor' ;");
+    
+    echo '<p>Уважаемый(-ая):'.$results->visitor.'</p><p>Проверьте ваши данные.</p><p>Ваш логин:'.$results->email.'<br>Ваш зашифрованный пароль: '.$results->pass.'.</p>';
+    
+}
 ?>

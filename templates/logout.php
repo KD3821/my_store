@@ -13,7 +13,6 @@ get_header();
 <?php
     end_session();
     include_once("auth-form.php");
-    // create_visitors_db();
 ?>
 
 </div>

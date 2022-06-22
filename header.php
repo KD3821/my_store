@@ -26,17 +26,15 @@
     </div>
     <div class="reg_nav">
     <?php    
-        
         if (isset($_SESSION['visitor'])) {
-            echo '<h3>'.$_SESSION['visitor'].'</h3>';
+            echo '<h3 style="color:red">'.$_SESSION['visitor'].'</h3>';
             $_SESSION['log_var'] = 'logout';
-            
         } else {
-            echo '<h3>Неавторизованный пользователь</h3>';
+            echo '<h3 style="color:red">Неавторизованный пользователь</h3>';
             $_SESSION['log_var'] = 'login';
         }
     ?>
-    <?php 
+    <?php
         wp_nav_menu([
             'theme_location' => $_SESSION['log_var'],
             'container' => '',

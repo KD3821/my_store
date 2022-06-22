@@ -1,8 +1,7 @@
-
-
 <?php
 
-function insert_my_data() {
+//---------------- Функции для обработки формы запроса ---------------------
+function insert_my_data() {       //создает новую запись в таблице wp_new_db
 
     global $wpdb;
     $tablename = $wpdb->prefix.'new_db';
@@ -22,8 +21,7 @@ function insert_my_data() {
     }
 }
 
-
-function show_result() {
+function show_result() {        //выводит данные из таблицы wp_new_db, записанные во время отправки формы в файле 'contact-form.php'
 
     global $wpdb;
     $res_email = trim($_POST['useremail']);
@@ -36,9 +34,11 @@ function show_result() {
         <p>Спасибо за обращение и хорошего дня!</p><p>Для оформления нового запроса пройдите по <a href="?page_id=23">ссылке</a></p>';
 
 }
+//---------------- Функции для обработки формы запроса ---------------------
 
 
-function insert_visitor() {
+//---------------- Функции для обработки формы регистрации нового пользователя --------------------
+function insert_visitor() {      //создает новую запись о пользователе в таблице wp_visitors_db
 
     global $wpdb;
     $tablename = $wpdb->prefix.'visitors_db';
@@ -61,8 +61,7 @@ function insert_visitor() {
     }
 }
 
-
-function show_reg_result() {
+function show_reg_result() {      //выводит данные из таблицы wp_visitors_db, записанные во время отправки формы в файле 'reg-form.php'
 
     global $wpdb;
     $reg_email = $_POST['user_email'];
@@ -73,13 +72,12 @@ function show_reg_result() {
         echo '<p>Уважаемый(-ая):'.$results->visitor.'</p><p>Вы успешно зарегистрированы.</p><p>Ваш логин:'.$results->email.'<br>Ваш зашифрованный пароль: '.$results->pass.' ('.$_POST['user_pass'].').</p>';
     } else {
         echo '<p>Пользователь с таким email уже существует</p><p><a href="">Войдите</a> с помощью пароля </p><p>Либо используйте другой email для регистрации.</p>';
-    }
-    
-    
+    } 
 }
+//---------------- Функции для обработки формы регистрации нового пользователя --------------------
 
-
-function show_auth_result() {
+//---------------- Функция для обработки формы авторизации пользователя --------------------
+function show_auth_result() {      //выводит данные из таблицы wp_visitors_db,если данные из формы 'auth-form.php' соответсвуют
 
     global $wpdb;
     $auth_email = trim($_POST['user_email']);
@@ -97,10 +95,10 @@ function show_auth_result() {
     } else {
         echo 'Пользователь не существует!';
     }
-    
 }
+//---------------- Функция для обработки формы авторизации пользователя --------------------
 
-
+//---------------- Функция для отображения данных пользователя в личном кабинет (пока такие - надо думать над функционалом ЛК) --------------------
 function show_settings() {
 
     global $wpdb;
@@ -111,4 +109,5 @@ function show_settings() {
     echo '<p>Уважаемый(-ая):'.$results->visitor.'</p><p>Проверьте ваши данные.</p><p>Ваш логин:'.$results->email.'<br>Ваш зашифрованный пароль: '.$results->pass.'.</p>';
     
 }
+
 ?>

@@ -11,7 +11,7 @@ get_header();
 
 <?php
     $wpdb->hide_errors();
-    include_once("contact-form-res.php");
+    include_once("form-funcs.php");
     insert_visitor();
     show_reg_result();
 ?>

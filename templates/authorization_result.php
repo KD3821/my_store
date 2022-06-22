@@ -10,7 +10,7 @@ get_header();
 <div class="register">
 
 <?php
-    include_once("contact-form-res.php");
+    include_once("form-funcs.php");
     show_auth_result();
 ?>
 

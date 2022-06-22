@@ -11,7 +11,7 @@ get_header();
 <div class="settings">
 
 <?php
-    include_once("contact-form-res.php");
+    include_once("form-funcs.php");
     show_settings();
 ?>
 
